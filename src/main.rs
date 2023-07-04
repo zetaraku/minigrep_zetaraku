@@ -12,14 +12,18 @@ fn main() {
         file_path = config.file_path,
     );
 
-    run(config);
+    run(config).unwrap_or_else(|err|{
+        println!("Application error: {err}");
+        std::process::exit(1);
+    });
 }
 
-fn run(config: Config) {
-    let contents = std::fs::read_to_string(config.file_path)
-        .expect("Should have been able to read the file");
+fn run(config: Config) -> Result<(), Box<dyn std::error::Error>> {
+    let contents = std::fs::read_to_string(config.file_path)?;
 
     println!("With text:\n{contents}");
+
+    Ok(())
 }
 
 struct Config {
