@@ -12,6 +12,10 @@ fn main() {
         file_path = config.file_path,
     );
 
+    run(config);
+}
+
+fn run(config: Config) {
     let contents = std::fs::read_to_string(config.file_path)
         .expect("Should have been able to read the file");
 
