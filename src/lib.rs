@@ -29,7 +29,17 @@ pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
 }
 
 pub fn search_case_insensitive<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
-    vec![]
+    let lowercase_query = query.to_lowercase();
+
+    let mut results = Vec::new();
+
+    for line in contents.lines() {
+        if line.to_lowercase().contains(&lowercase_query) {
+            results.push(line);
+        }
+    }
+
+    results
 }
 
 pub fn run(config: Config) -> Result<(), Box<dyn std::error::Error>> {
