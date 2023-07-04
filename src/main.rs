@@ -1,7 +1,10 @@
 fn main() {
     let args: Vec<String> = std::env::args().collect();
 
-    let config = Config::new(&args);
+    let config = Config::build(&args).unwrap_or_else(|err| {
+        println!("Problem parsing arguments: {err}");
+        std::process::exit(1);
+    });
 
     println!(
         "Searching for `{query}` in file `{file_path}`",
@@ -21,14 +24,14 @@ struct Config {
 }
 
 impl Config {
-    fn new(args: &[String]) -> Self {
+    fn build(args: &[String]) -> Result<Self, &'static str> {
         if args.len() < 3 {
-            panic!("not enough arguments");
+            return Err("not enough arguments");
         }
 
         let query = args[1].clone();
         let file_path = args[2].clone();
 
-        Self { query, file_path }
+        Ok(Self { query, file_path })
     }
 }
