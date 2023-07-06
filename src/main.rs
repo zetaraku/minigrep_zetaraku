@@ -1,7 +1,5 @@
 fn main() {
-    let args: Vec<String> = std::env::args().collect();
-
-    let config = minigrep::Config::build(&args).unwrap_or_else(|err| {
+    let config = minigrep::Config::build(std::env::args()).unwrap_or_else(|err| {
         eprintln!("Problem parsing arguments: {err}");
         std::process::exit(1);
     });
