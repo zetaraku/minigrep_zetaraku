@@ -25,7 +25,11 @@ impl Config {
 
         let ignore_case = std::env::var("IGNORE_CASE").is_ok();
 
-        Ok(Self { query, file_path, ignore_case })
+        Ok(Self {
+            query,
+            file_path,
+            ignore_case,
+        })
     }
 }
 
@@ -44,7 +48,8 @@ impl Config {
 /// assert_eq!(vec!["safe, fast, productive."], minigrep_zetaraku::search(query, contents));
 /// ```
 pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
-    contents.lines()
+    contents
+        .lines()
         .filter(|line: &&str| line.contains(query))
         .collect()
 }
@@ -66,7 +71,8 @@ pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
 pub fn search_case_insensitive<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
     let lowercase_query = query.to_lowercase();
 
-    contents.lines()
+    contents
+        .lines()
         .filter(|line: &&str| line.to_lowercase().contains(&lowercase_query))
         .collect()
 }
@@ -112,6 +118,9 @@ safe, fast, productive.
 Pick three.
 Trust me.";
 
-        assert_eq!(vec!["Rust:", "Trust me."], search_case_insensitive(query, contents));
+        assert_eq!(
+            vec!["Rust:", "Trust me."],
+            search_case_insensitive(query, contents),
+        );
     }
 }

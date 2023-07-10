@@ -4,7 +4,7 @@ fn main() {
         std::process::exit(1);
     });
 
-    minigrep_zetaraku::run(config).unwrap_or_else(|err|{
+    minigrep_zetaraku::run(config).unwrap_or_else(|err| {
         eprintln!("Application error: {err}");
         std::process::exit(1);
     });
