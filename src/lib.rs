@@ -1,6 +1,6 @@
-//! # minigrep
+//! # minigrep_zetaraku
 //!
-//! `minigrep` is a collection of utilities used to search for lines containing a specific string.
+//! `minigrep_zetaraku` is a collection of utilities used to search for lines containing a specific string.
 
 pub struct Config {
     pub query: String,
@@ -41,7 +41,7 @@ impl Config {
 /// Pick three.
 /// Duct tape.";
 ///
-/// assert_eq!(vec!["safe, fast, productive."], minigrep::search(query, contents));
+/// assert_eq!(vec!["safe, fast, productive."], minigrep_zetaraku::search(query, contents));
 /// ```
 pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
     contents.lines()
@@ -61,7 +61,7 @@ pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
 /// Pick three.
 /// Trust me.";
 ///
-/// assert_eq!(vec!["Rust:", "Trust me."], minigrep::search_case_insensitive(query, contents));
+/// assert_eq!(vec!["Rust:", "Trust me."], minigrep_zetaraku::search_case_insensitive(query, contents));
 /// ```
 pub fn search_case_insensitive<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
     let lowercase_query = query.to_lowercase();

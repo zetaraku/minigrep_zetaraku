@@ -1,5 +1,5 @@
 [package]
-name = "minigrep"
+name = "minigrep_zetaraku"
 version = "0.1.0"
 edition = "2021"
 description = "A collection of utilities used to search for lines containing a specific string."
