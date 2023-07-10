@@ -1,3 +1,7 @@
+//! # minigrep
+//!
+//! `minigrep` is a collection of utilities used to search for lines containing a specific string.
+
 pub struct Config {
     pub query: String,
     pub file_path: String,
@@ -25,12 +29,40 @@ impl Config {
     }
 }
 
+/// Search for lines in `contents` containing `query`.
+///
+/// # Examples
+///
+/// ```
+/// let query = "duct";
+/// let contents = "\
+/// Rust:
+/// safe, fast, productive.
+/// Pick three.
+/// Duct tape.";
+///
+/// assert_eq!(vec!["safe, fast, productive."], minigrep::search(query, contents));
+/// ```
 pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
     contents.lines()
         .filter(|line: &&str| line.contains(query))
         .collect()
 }
 
+/// Search for lines in `contents` containing `query` (case insensitive).
+///
+/// # Examples
+///
+/// ```
+/// let query = "rUsT";
+/// let contents = "\
+/// Rust:
+/// safe, fast, productive.
+/// Pick three.
+/// Trust me.";
+///
+/// assert_eq!(vec!["Rust:", "Trust me."], minigrep::search_case_insensitive(query, contents));
+/// ```
 pub fn search_case_insensitive<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
     let lowercase_query = query.to_lowercase();
 
